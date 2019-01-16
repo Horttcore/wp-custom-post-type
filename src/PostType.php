@@ -4,7 +4,12 @@ namespace Horttcore\CustomPostType;
 abstract class PostType
 {
 
-    protected $slug = null;
+    /**
+     * Post type slug
+     * 
+     * @var string $slug
+     */
+    protected $slug = 'null';
 
 
     /**
@@ -67,7 +72,7 @@ abstract class PostType
      *
      * @return array
      **/
-    abstract function getConfig();
+    abstract function getConfig(): array;
 
 
     /**
@@ -75,7 +80,7 @@ abstract class PostType
      *
      * @return array
      **/
-    abstract function getLabels();
+    abstract function getLabels(): array;
 
 
     /**
