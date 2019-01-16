@@ -41,7 +41,7 @@ abstract class PostType
     {
         $post = get_post();
         $postType = $this->getPostTypeSlug();
-        $postTtypeObject = get_post_type_object($post_type);
+        $postTtypeObject = get_post_type_object($postType);
         $messages[$postType] = $this->getPostUpdateMessages( $post, $postType, $postTtypeObject );
 
         return $messages;
@@ -86,7 +86,7 @@ abstract class PostType
      * @param WP_Post_Type $postType Post type slug
      * @return array Update messages
      **/
-    abstract function getUpdateMessages(\WP_Post $post, string $postType, \WP_Post_Type $postTypeObjects) : array;
+    abstract function getPostUpdateMessages(\WP_Post $post, string $postType, \WP_Post_Type $postTypeObjects) : array;
 
 
 }
