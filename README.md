@@ -140,6 +140,10 @@ class Thing extends PostType
 
 ## Changelog
 
+### v1.0.2
+
+* Documentation and enforcing return types
+
 ### v1.0.1
 
 * Fix typos
