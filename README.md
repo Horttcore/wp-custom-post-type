@@ -2,7 +2,7 @@
 
 ## Installation
 
-`composer require Horttcore\CustomPostType`
+`composer require horttcore/wp-custom-post-type`
 
 ## Usage
 
