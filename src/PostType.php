@@ -1,91 +1,64 @@
 <?php
 
-namespace Horttcore\CustomPostType;
+namespace RalfHortt\CustomPostType;
 
 abstract class PostType
 {
     /**
      * Post type slug.
-     *
-     * @var string
      */
-    protected $slug = 'null';
+    protected string $slug;
 
     /**
      * Register hooks.
-     *
-     * @since 1.0.0
      **/
-    public function register()
+    public function register(): void
     {
-        add_action('init', [$this, 'registerPostType']);
-        add_action('post_updated_messages', [$this, 'postUpdateMessages']);
+        \add_action('init', [$this, 'registerPostType']);
+        \add_action('post_updated_messages', [$this, 'postUpdateMessages']);
     }
 
     /**
      * Get post type slug.
-     *
-     * @return string
-     *
-     * @since 1.0.0
      **/
     protected function getPostTypeSlug(): string
     {
         return $this->slug;
     }
 
-    /**
-     * Register post type.
-     *
-     * @param array $messages Post update messages
-     *
-     * @return array
-     **/
-    public function postUpdateMessages($messages): array
+    public function postUpdateMessages(array $postUpdateMessages): array
     {
-        $post = get_post();
+        $post = \get_post();
         $postType = $this->getPostTypeSlug();
-        $postTtypeObject = get_post_type_object($postType);
-        $messages[$postType] = $this->getPostUpdateMessages($post, $postType, $postTtypeObject);
+        $postTtypeObject = \get_post_type_object($postType);
+        $postUpdateMessages[$postType] = $this->getPostUpdateMessages($post, $postType, $postTtypeObject);
 
-        return $messages;
+        return $postUpdateMessages;
     }
 
     /**
      * Register post type.
-     *
-     * @return WP_Post_Type|WP_Error
      **/
-    public function registerPostType()
+    public function registerPostType(): \WP_Post_Type|\WP_Error
     {
         $args = $this->getConfig();
         $args['labels'] = $this->getLabels();
 
-        return register_post_type($this->getPostTypeSlug(), $args);
+        return \register_post_type($this->getPostTypeSlug(), $args);
     }
 
     /**
      * Get configuration.
-     *
-     * @return array
      **/
     abstract public function getConfig(): array;
 
     /**
      * Get post type labels.
-     *
-     * @return array
      **/
     abstract public function getLabels(): array;
 
     /**
-     * Update messages.
-     *
-     * @param WP_Post      $post     Post object
-     * @param string       $postType Post type slug
-     * @param WP_Post_Type $postType Post type slug
-     *
-     * @return array Update messages
+     * Get post update messages.
      **/
-    abstract public function getPostUpdateMessages(\WP_Post $post, string $postType, \WP_Post_Type $postTypeObjects): array;
+    abstract public function getPostUpdateMessages(\WP_Post $post, string $postTypeSlug, \WP_Post_Type $postTypeObject): array;
 }

@@ -2,11 +2,11 @@
 
 ## Installation
 
-`composer require horttcore/wp-custom-post-type`
+`composer require ralfhortt/wp-custom-post-type`
 
 ## Usage
 
-Extend the abstract class `Horttcore\CustomPostType\PostType()` and overwrite following methods:
+Extend the abstract class `RalfHortt\CustomPostType\PostType` and overwrite following methods:
 
 * `getConfig()`
 * `getLabels()`
@@ -18,7 +18,7 @@ The extending class _MUST_ define protected class variable `slug`
 
 ```php
 <?php
-use Horttcore\CustomPostType\PostType;
+use RalfHortt\CustomPostType\PostType;
 
 class Thing extends PostType
 {
@@ -139,6 +139,10 @@ class Thing extends PostType
 ```
 
 ## Changelog
+
+### v2.0.0
+
+* Update namespace
 
 ### v1.0.2
 
